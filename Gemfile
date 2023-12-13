@@ -72,3 +72,17 @@ group :test do
 end
 
 gem "rack-cors", "~> 2.0"
+
+gem "faker", "~> 3.2"
+
+gem "sidekiq", "~> 7.2"
+
+gem "redis", "~> 5.0"
+
+gem "sidekiq-cron", "~> 1.12"
+
+gem "rspec", "~> 3.12"
+
+gem "jwt"
+
+gem "bcrypt", "~> 3.1.7"
