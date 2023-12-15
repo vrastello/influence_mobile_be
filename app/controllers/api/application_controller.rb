@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationController < ActionController::API
+class Api::ApplicationController < ActionController::API
   include JsonWebToken
 
   before_action :authenticate_request
