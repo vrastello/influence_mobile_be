@@ -1,11 +1,10 @@
 class Api::V1::OffersController < Api::ApplicationController
-  skip_before_action :authenticate_request
   before_action :set_offer, only: %i[ show edit update destroy ]
 
   # GET /offers or /offers.json
   def index
-    # @offers = Offer.all
-    render json: { offers: [{ id: 1, description: 'Test' }] }, status: :ok
+    collection = Offer.all
+    render json: OfferSerializer.serialize_collection(collection: collection)
   end
 
   # GET /offers/1 or /offers/1.json

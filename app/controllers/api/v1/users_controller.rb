@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UsersController < Api::ApplicationController
+class Api::V1::UsersController < Api::ApplicationController
   skip_before_action :authenticate_request, only: %i[create]
   before_action :set_user, only: %i[show edit update destroy]
 
@@ -24,10 +24,12 @@ class UsersController < Api::ApplicationController
 
   # POST /users or /users.json
   def create
+    user_params.inspect
     @user = User.new(user_params)
-    if @user.save
+    if @user.save!
       render json: @user, status: :created
     else
+      @user.errors.full_messages.inspect
       render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
@@ -63,6 +65,7 @@ class UsersController < Api::ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
+    params.inspect
     params.require(:user).permit(:username, :email, :first_name, :last_name, :birthdate, :gender, :password)
   end
 end

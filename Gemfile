@@ -86,3 +86,5 @@ gem "rspec", "~> 3.12"
 gem "jwt"
 
 gem "bcrypt", "~> 3.1.7"
+
+gem "jsonapi-serializer", "~> 2.2"
