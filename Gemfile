@@ -83,8 +83,12 @@ gem "sidekiq-cron", "~> 1.12"
 
 gem "rspec", "~> 3.12"
 
-gem "jwt"
+gem "jwt", "~> 2.6.0"
 
 gem "bcrypt", "~> 3.1.7"
 
 gem "jsonapi-serializer", "~> 2.2"
+
+gem "securerandom", "~> 0.1.0"
+
+gem "active_model_serializers", "~> 0.8.3"

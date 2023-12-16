@@ -8,6 +8,6 @@ class BaseJsonSerializer
   end
 
   def self.serialize_collection(collection:)
-    collection.map { |item| new(item, params: params).serializable_attributes }
+    collection.map { |item| new(item).serializable_attributes }
   end
 end

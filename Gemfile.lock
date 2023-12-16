@@ -46,6 +46,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_model_serializers (0.8.4)
+      activemodel (>= 3.0)
     activejob (7.0.8)
       activesupport (= 7.0.8)
       globalid (>= 0.3.6)
@@ -208,6 +210,7 @@ GEM
       rspec-support (~> 3.12.0)
     rspec-support (3.12.1)
     rubyzip (2.3.2)
+    securerandom (0.1.0)
     selenium-webdriver (4.16.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -256,6 +259,7 @@ PLATFORMS
   x86_64-darwin-22
 
 DEPENDENCIES
+  active_model_serializers (~> 0.8.3)
   bcrypt (~> 3.1.7)
   bootsnap
   capybara
@@ -264,13 +268,14 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jsonapi-serializer (~> 2.2)
-  jwt
+  jwt (~> 2.6.0)
   pg (~> 1.5.4)
   puma (~> 5.0)
   rack-cors (~> 2.0)
   rails (~> 7.0.8)
   redis (~> 5.0)
   rspec (~> 3.12)
+  securerandom (~> 0.1.0)
   selenium-webdriver
   sidekiq (~> 7.2)
   sidekiq-cron (~> 1.12)
