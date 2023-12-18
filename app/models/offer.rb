@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'money'
+
 class Offer < ApplicationRecord
   has_many :offer_details, dependent: :destroy
 
@@ -8,6 +10,6 @@ class Offer < ApplicationRecord
   validates :payout, presence: true, numericality: { greater_than: 0 }
 
   def formatted_payout
-    "$#{payout.to_f / 100}"
+    Money.from_cents(payout, 'USD').format
   end
 end

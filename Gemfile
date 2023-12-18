@@ -92,3 +92,5 @@ gem "jsonapi-serializer", "~> 2.2"
 gem "securerandom", "~> 0.1.0"
 
 gem "active_model_serializers", "~> 0.8.3"
+
+gem "money", "~> 6.16.0"

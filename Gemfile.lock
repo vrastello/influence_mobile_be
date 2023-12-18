@@ -131,6 +131,8 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.20.0)
+    money (6.16.0)
+      i18n (>= 0.6.4, <= 2)
     msgpack (1.7.2)
     net-imap (0.4.8)
       date
@@ -269,6 +271,7 @@ DEPENDENCIES
   jbuilder
   jsonapi-serializer (~> 2.2)
   jwt (~> 2.6.0)
+  money (~> 6.16.0)
   pg (~> 1.5.4)
   puma (~> 5.0)
   rack-cors (~> 2.0)
