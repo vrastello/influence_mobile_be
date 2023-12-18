@@ -1,6 +1,7 @@
 class Api::V1::OffersController < Api::ApplicationController
   before_action :set_offer, only: %i[ show edit update destroy ]
-  before_action :authenticate_admin
+  before_action :conditional_authenticate_admin, only: %i[index]
+  before_action :authenticate_admin, except: %i[index]
 
   # GET /offers or /offers.json
   def index
@@ -10,6 +11,7 @@ class Api::V1::OffersController < Api::ApplicationController
 
   # GET /offers/1 or /offers/1.json
   def show
+    render json: OfferSerializer.new(@offer).serializable_attributes
   end
 
   # GET /offers/new
@@ -71,6 +73,10 @@ class Api::V1::OffersController < Api::ApplicationController
   end
 
   def authenticate_admin
+    render json: { error: 'Unauthorized' }, status: :unauthorized unless @current_user.admin?
+  end
+
+  def conditional_authenticate_admin
     render json: { error: 'Unauthorized' }, status: :unauthorized if unauthorized_request?
   end
 
