@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_17_201014) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_18_012816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_17_201014) do
     t.integer "end_age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", null: false
   end
 
   create_table "offer_details", force: :cascade do |t|
@@ -28,6 +29,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_17_201014) do
     t.integer "play_hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "age_group_id"
+    t.boolean "disabled", default: true, null: false
+    t.index ["age_group_id"], name: "index_offer_details_on_age_group_id"
     t.index ["offer_id"], name: "index_offer_details_on_offer_id"
   end
 
