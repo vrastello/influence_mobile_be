@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   require "securerandom"
 
+  ROLES = [USER = 'user', ADMIN = 'admin'].freeze
+
   has_secure_password
 
   validates :email, presence: true, uniqueness: true

@@ -7,7 +7,7 @@ class Api::AuthenticationController < Api::ApplicationController
     @user = User.find_by(username: params[:username])
     if @user&.authenticate(params[:password])
       token = jwt_encode(user_id: @user.id)
-      render json: { token: token }, status: :ok
+      render json: { token: token, role: @user.role }, status: :ok
     else
       render json: { error: 'Invalid username / password' }, status: :unauthorized
     end

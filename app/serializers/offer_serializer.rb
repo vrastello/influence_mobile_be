@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OfferSerializer < BaseJsonSerializer
-  attributes :title, :genre, :description, :tier
+  attributes :id, :title, :genre, :description
 
   attribute :payout, &:formatted_payout
 end
