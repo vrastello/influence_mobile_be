@@ -1,9 +1,10 @@
 class Api::V1::OffersController < Api::ApplicationController
   before_action :set_offer, only: %i[ show edit update destroy ]
+  before_action :authenticate_admin
 
   # GET /offers or /offers.json
   def index
-    collection = Offer.all
+    collection = admin? ? Offer.all : OfferQuery.user_specific_offers(@current_user)
     render json: OfferSerializer.serialize_collection(collection: collection)
   end
 
@@ -60,12 +61,24 @@ class Api::V1::OffersController < Api::ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_offer
-      @offer = Offer.find(params[:id])
-    end
+  def set_offer
+    @offer = Offer.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def offer_params
-      params.require(:offer).permit(:description)
-    end
+  # Only allow a list of trusted parameters through.
+  def offer_params
+    params.require(:offer).permit(:description)
+  end
+
+  def authenticate_admin
+    render json: { error: 'Unauthorized' }, status: :unauthorized if unauthorized_request?
+  end
+
+  def admin?
+    params['role'] == 'admin' && @current_user.admin?
+  end
+
+  def unauthorized_request?
+    params['role'] == 'admin' && !@current_user.admin?
+  end
 end
