@@ -8,6 +8,13 @@ class Api::ApplicationController < ActionController::API
   private
 
   def authenticate_request
+    find_user_with_token
+  rescue Standard::Error => e
+    # any error here means token is invalid
+    render json: { error: e.message }, status: :unauthorized
+  end
+
+  def find_user_with_token
     request.headers.inspect
     header = request.headers['Authorization']
     header = header.split(' ').last if header

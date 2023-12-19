@@ -1,12 +1,15 @@
 class Api::V1::OffersController < Api::ApplicationController
   before_action :set_offer, only: %i[ show edit update destroy ]
-  before_action :conditional_authenticate_admin, only: %i[index]
   before_action :authenticate_admin, except: %i[index]
 
   # GET /offers or /offers.json
   def index
-    collection = admin? ? Offer.all : OfferQuery.user_specific_offers(@current_user)
-    render json: OfferSerializer.serialize_collection(collection: collection)
+    collection = OfferQuery.user_specific_offers(@current_user)
+    render json: OfferSerializer.serialize_collection(collection: collection), status: :ok
+  end
+
+  def admin_offers
+    render json: OfferSerializer.serialize_collection(collection: Offer.all)
   end
 
   # GET /offers/1 or /offers/1.json
@@ -74,17 +77,5 @@ class Api::V1::OffersController < Api::ApplicationController
 
   def authenticate_admin
     render json: { error: 'Unauthorized' }, status: :unauthorized unless @current_user.admin?
-  end
-
-  def conditional_authenticate_admin
-    render json: { error: 'Unauthorized' }, status: :unauthorized if unauthorized_request?
-  end
-
-  def admin?
-    params['role'] == 'admin' && @current_user.admin?
-  end
-
-  def unauthorized_request?
-    params['role'] == 'admin' && !@current_user.admin?
   end
 end
