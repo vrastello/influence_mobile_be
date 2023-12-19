@@ -3,6 +3,10 @@
 require 'money'
 
 class Offer < ApplicationRecord
+  # This was designed with intention of full CRUD, however instead of delete, disable
+  # this is nice sometimes when you want to keep the data around for historical analysis etc
+  # since influence mobile seems heavy on marketing and data analytics I tried to think in those
+  # terms.
   has_many :offer_details, dependent: :destroy
 
   GENDERS = %w[male female].freeze

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AgeGroup < ApplicationRecord
+  # assumed we would want to have minimum age for users so implemented that here
   has_many :offer_details
 
   MIN_AGE = 10

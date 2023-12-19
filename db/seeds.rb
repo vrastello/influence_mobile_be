@@ -3,7 +3,7 @@ require 'faker'
 20.times do |i|
   AgeGroup.create!(name: "group #{i}",
                    start_age: Faker::Number.between(from: 10, to: 25),
-                   end_age: Faker::Number.between(from: 25, to: 50))
+                   end_age: Faker::Number.between(from: 25, to: 60))
                    puts "seeding age group....#{i}"
 end
 

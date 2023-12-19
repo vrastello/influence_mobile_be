@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  # built with roles in mind, also set age to make everything easier, ideally we would want to use a
+  # scheduler like sidekiq-cron and check daily for birthdays to update users age
+  # was planning on implementing this but didn't want to delay the submission!
   require "securerandom"
 
   ROLES = [USER = 'user', ADMIN = 'admin'].freeze
 
   has_secure_password
 
+  before_validation :set_age
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
   validates :username, presence: true, uniqueness: true
@@ -14,8 +18,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :gender, presence: true
+  validates :age, numericality: { greater_than_or_equal_to: AgeGroup::MIN_AGE }
 
-  before_create :set_age
   before_create :set_role
 
   def admin?
@@ -25,6 +29,8 @@ class User < ApplicationRecord
   private
 
   def set_age
+    return unless birthdate.present?
+
     self.age = ((Time.current - birthdate.to_time) / 1.year.seconds).floor
   end
 

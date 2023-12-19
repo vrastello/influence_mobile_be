@@ -1,6 +1,6 @@
 class Api::V1::OffersController < Api::ApplicationController
   include SerializedUserOffer
-  before_action :set_offer, only: %i[ show ]
+  before_action :set_offer, only: %i[show]
   before_action :authenticate_admin, except: %i[index]
 
   def index
@@ -16,13 +16,12 @@ class Api::V1::OffersController < Api::ApplicationController
   end
 
   def log_play_hours
-    @offer_detail = OfferDetail.find(update_params[:offer_detail_id])
+    LogPlayHoursService.new(params: update_params, user: @current_user).log
 
-    if @offer_detail.update(play_hours: update_params[:play_hours])
-      render json: { message: 'Updated successfully' }, status: :ok
-    else
-      render json: { errors: @offer_detail.errors }, status: :unprocessable_entity
-    end
+    render json: { message: 'Play hours logged successfully' }, status: :ok
+  rescue StandardError => e
+    puts e.message.inspect
+    render json: { errors: e.message }, status: :unprocessable_entity
   end
 
   private
@@ -32,7 +31,7 @@ class Api::V1::OffersController < Api::ApplicationController
   end
 
   def update_params
-    params.require(:offer_detail).permit(:play_hours, :offer_detail_id)
+    params.require(:offer).permit(:play_hours, :offer_id)
   end
 
   def authenticate_admin
