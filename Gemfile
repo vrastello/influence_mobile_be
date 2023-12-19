@@ -48,7 +48,35 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+gem "rack-cors", "~> 2.0"
+
+gem "faker", "~> 3.2"
+
+gem "sidekiq", "~> 7.2"
+
+gem "redis", "~> 5.0"
+
+gem "sidekiq-cron", "~> 1.12"
+
+gem "jwt", "~> 2.6.0"
+
+gem "bcrypt", "~> 3.1.7"
+
+gem "jsonapi-serializer", "~> 2.2"
+
+gem "securerandom", "~> 0.1.0"
+
+gem "active_model_serializers", "~> 0.8.3"
+
+gem "money", "~> 6.16.0"
+
 group :development, :test do
+
+  gem "rspec-rails", '~> 6.1.0'
+
+  gem "factory_bot_rails", "6.2.0"
+
+  gem "shoulda-matchers", "~> 5.1.0"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
@@ -70,27 +98,3 @@ group :test do
   gem "selenium-webdriver"
 
 end
-
-gem "rack-cors", "~> 2.0"
-
-gem "faker", "~> 3.2"
-
-gem "sidekiq", "~> 7.2"
-
-gem "redis", "~> 5.0"
-
-gem "sidekiq-cron", "~> 1.12"
-
-gem "rspec", "~> 3.12"
-
-gem "jwt", "~> 2.6.0"
-
-gem "bcrypt", "~> 3.1.7"
-
-gem "jsonapi-serializer", "~> 2.2"
-
-gem "securerandom", "~> 0.1.0"
-
-gem "active_model_serializers", "~> 0.8.3"
-
-gem "money", "~> 6.16.0"
