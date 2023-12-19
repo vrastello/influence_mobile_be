@@ -8,15 +8,15 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :email, presence: true, uniqueness: true
-  validates :password_digest, presence: true, length: { minimum: 8 }
+  validates :password_digest, presence: true
   validates :username, presence: true, uniqueness: true
   validates :birthdate, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :gender, presence: true
 
-  after_create :set_age
-  after_create :set_role
+  before_create :set_age
+  before_create :set_role
 
   def admin?
     role == ADMIN

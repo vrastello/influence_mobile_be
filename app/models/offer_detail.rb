@@ -6,6 +6,7 @@ class OfferDetail < ApplicationRecord
 
   validates :age_group_id, presence: true, on: :create
   validates :offer_id, presence: true
+  validates :play_hours, numericality: { allow_nil: true, only_integer: true, greater_than: 0 }
   after_validation :set_age_range
 
   private
