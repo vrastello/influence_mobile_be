@@ -26,11 +26,11 @@ class Api::V1::UsersController < Api::ApplicationController
   def create
     user_params.inspect
     @user = User.new(user_params)
-    if @user.save!
+    if @user.save
       render json: @user, status: :created
     else
       @user.errors.full_messages.inspect
-      render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
+      render json: { error: @user.errors }, status: :unprocessable_entity
     end
   end
 

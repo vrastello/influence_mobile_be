@@ -10,7 +10,13 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true, length: { minimum: 8 }
   validates :username, presence: true, uniqueness: true
-  after_validation :set_age
+  validates :birthdate, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :gender, presence: true
+
+  after_create :set_age
+  after_create :set_role
 
   def admin?
     role == ADMIN
@@ -20,5 +26,11 @@ class User < ApplicationRecord
 
   def set_age
     self.age = ((Time.current - birthdate.to_time) / 1.year.seconds).floor
+  end
+
+  def set_role
+    return if role.present?
+
+    self.role = USER
   end
 end
