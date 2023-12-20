@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_19_204234) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_20_201207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_19_204234) do
     t.datetime "updated_at", null: false
     t.bigint "age_group_id"
     t.boolean "disabled", default: true, null: false
+    t.string "gender", default: [], array: true
     t.index ["age_group_id"], name: "index_offer_details_on_age_group_id"
     t.index ["offer_id"], name: "index_offer_details_on_offer_id"
   end
@@ -39,7 +40,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_19_204234) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "gender", default: [], array: true
     t.string "genre"
     t.string "title"
     t.integer "payout"
