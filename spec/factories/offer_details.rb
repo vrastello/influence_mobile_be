@@ -8,5 +8,6 @@ FactoryBot.define do
     age_group { create(:age_group) }
     offer { create(:offer) }
     disabled { false }
+    gender { %w[male female] }
   end
 end

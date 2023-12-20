@@ -5,8 +5,6 @@ class OfferSerializer < BaseJsonSerializer
 
   attribute :payout, &:formatted_payout
 
-  attribute :gender, &:formatted_gender
-
   attribute :offer_details do |offer|
     OfferDetailSerializer.serialize_collection_with_root(collection: offer.offer_details)
   end

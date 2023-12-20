@@ -25,11 +25,4 @@ RSpec.describe Offer, type: :model do
       expect(subject.formatted_payout).to eq '$23.99'
     end
   end
-
-  describe '#formatted_gender' do
-    subject { create(:offer, gender: ['male', 'female']) }
-    it 'returns formatted payout' do
-      expect(subject.formatted_gender).to eq 'male and female'
-    end
-  end
 end

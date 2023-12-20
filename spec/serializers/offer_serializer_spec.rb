@@ -13,7 +13,6 @@ RSpec.describe OfferSerializer do
       expect(subject[:id]).to eq(offer.id)
       expect(subject[:title]).to eq(offer.title)
       expect(subject[:payout]).to eq(offer.formatted_payout)
-      expect(subject[:gender]).to eq(offer.formatted_gender)
     end
 
     it "returns serialized offer_detail" do
@@ -24,6 +23,7 @@ RSpec.describe OfferSerializer do
       expect(offer_detail_hash[:end_age]).to eq(offer_detail.end_age)
       expect(offer_detail_hash[:play_hours]).to eq(offer_detail.play_hours)
       expect(offer_detail_hash[:age_group_id]).to eq(offer_detail.age_group_id)
+      expect(offer_detail_hash[:gender]).to eq(offer_detail.formatted_gender)
     end
   end
 end

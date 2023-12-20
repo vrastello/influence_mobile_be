@@ -23,15 +23,16 @@ class OfferQuery
   end
 
   def user_offers
-    @relation.where('? = ANY (gender)', user.gender)
-             .joins(:offer_details)
+    @relation.joins(:offer_details)
              .where(offer_details: { disabled: false })
-             .merge(OfferDetail.within_age_range(user.age))
+             .merge(OfferDetail.within_user_gender(user.gender))
+             .merge(OfferDetail.within_user_age(user.age))
              .order(:title).uniq
   end
 
   def offer_detail_by_age
     @relation.where(offer: offer)
-             .merge(OfferDetail.within_age_range(user.age))
+             .merge(OfferDetail.within_user_age(user.age))
+             .merge(OfferDetail.within_user_gender(user.gender))
   end
 end

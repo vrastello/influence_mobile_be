@@ -1,26 +1,25 @@
 require 'faker'
 
-20.times do |i|
+age_range = [[10, 15], [16, 20], [21, 25], [26, 30], [31, 40], [41, 60]]
+age_range.each_with_index do |range, i|
   AgeGroup.create!(name: "group #{i}",
-                   start_age: Faker::Number.between(from: 10, to: 25),
-                   end_age: Faker::Number.between(from: 25, to: 60))
-                   puts "seeding age group....#{i}"
+                  start_age: range[0],
+                  end_age: range[1])
+                  puts "seeding age group....#{i}"
 end
 
 100.times do |i|
-  offer = Offer.create!(description: Faker::Marketing.buzzwords, 
-                        gender: Offer::GENDERS.sample([1, 2].sample),
+  offer = Offer.create!(description: Faker::Marketing.buzzwords,
                         genre: Faker::Game.genre,
                         title: Faker::Game.title,
                         payout: Faker::Number.between(from: 1000, to: 20_000))
                         puts "seeding offers....#{i}"
 
-  group_ids = (1..10).to_a.sample 5 # 5 random and unique age groups/offer details for each offer
+  group_ids = (1..6).to_a.sample 4
   group_ids.each do |id|
-    offer.offer_details.create!(start_age: AgeGroup.find(id).start_age,
-                                end_age: AgeGroup.find(id).end_age,
-                                play_hours: Faker::Number.between(from: 1, to: 5000),
+    offer.offer_details.create!(play_hours: Faker::Number.between(from: 1, to: 5000),
                                 age_group_id: id,
+                                gender: OfferDetail::GENDERS.sample([1, 2].sample),
                                 disabled: false)
                                 puts "seeding 5 offer details for offer #{i}....."
   end
@@ -30,7 +29,7 @@ end
   User.create!(first_name: Faker::Name.first_name,
                last_name: Faker::Name.last_name,
                birthdate: Faker::Date.birthday(min_age: 10, max_age: 50),
-               gender: Offer::GENDERS.sample,
+               gender: OfferDetail::GENDERS.sample,
                username: Faker::Internet.username + i.to_s,
                email: Faker::Internet.email,
                password: "password",
@@ -41,7 +40,7 @@ end
 User.create!(first_name: "Admin",
              last_name: "Admin",
              birthdate: Faker::Date.birthday(min_age: 10, max_age: 50),
-             gender: Offer::GENDERS.sample,
+             gender: OfferDetail::GENDERS.sample,
              username: "admin",
              email: "admin@admin.com",
              password: "password",
