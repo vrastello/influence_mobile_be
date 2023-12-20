@@ -72,6 +72,8 @@ gem "money", "~> 6.16.0"
 
 group :development, :test do
 
+  gem "byebug", "~>11.1.3"
+
   gem "rspec-rails", '~> 6.1.0'
 
   gem "factory_bot_rails", "6.2.0"

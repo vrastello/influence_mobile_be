@@ -10,7 +10,6 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  before_validation :set_age
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
   validates :username, presence: true, uniqueness: true
@@ -18,8 +17,9 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :gender, presence: true
-  validates :age, numericality: { greater_than_or_equal_to: AgeGroup::MIN_AGE }
+  validate :validate_age
 
+  before_create :set_age
   before_create :set_role
 
   def admin?
@@ -27,6 +27,12 @@ class User < ApplicationRecord
   end
 
   private
+
+  def validate_age
+    return unless birthdate && birthdate >= AgeGroup::MIN_AGE.years.ago
+
+    errors.add(:birthdate, "must be at least #{AgeGroup::MIN_AGE} years old")
+  end
 
   def set_age
     return unless birthdate.present?

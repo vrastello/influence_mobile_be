@@ -14,7 +14,7 @@ class OfferDetail < ApplicationRecord
   validates :age_group_id, presence: true, on: :create
   validates :offer_id, presence: true
   validates :play_hours, numericality: { only_integer: true, greater_than: 0 }
-  after_validation :set_age_range
+  after_create :set_age_range
 
   scope :within_age_range, lambda { |age|
     joins(:age_group)
