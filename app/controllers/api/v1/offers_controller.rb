@@ -1,7 +1,7 @@
 class Api::V1::OffersController < Api::ApplicationController
   include SerializedUserOffer
   before_action :set_offer, only: %i[show]
-  before_action :authenticate_admin, except: %i[index]
+  before_action :authenticate_admin, except: %i[index log_play_hours]
 
   def index
     render json: serialized_user_offer, status: :ok

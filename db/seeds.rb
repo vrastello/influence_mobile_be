@@ -19,7 +19,7 @@ end
   group_ids.each do |id|
     offer.offer_details.create!(start_age: AgeGroup.find(id).start_age,
                                 end_age: AgeGroup.find(id).end_age,
-                                play_hours: Faker::Number.between(from: 1, to: 9000),
+                                play_hours: Faker::Number.between(from: 1, to: 5000),
                                 age_group_id: id,
                                 disabled: false)
                                 puts "seeding 5 offer details for offer #{i}....."
