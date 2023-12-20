@@ -7,4 +7,10 @@ FactoryBot.define do
     title { Faker::Lorem.word }
     payout { 10_000 }
   end
+
+  trait :with_offer_details do
+    after(:create) do |offer|
+      create(:offer_detail, offer: offer)
+    end
+  end
 end
