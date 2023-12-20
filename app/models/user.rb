@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :gender, presence: true
   validate :validate_age
 
+  before_create { gender.downcase! }
   before_create :set_age
   before_create :set_role
 
