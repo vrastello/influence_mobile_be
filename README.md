@@ -9,7 +9,7 @@
 - This will run on localhost port 3002
 - I pointed front end at local host port 3002, so please use that for server set up
 
-# ---- These notes below is same as front end repo ----------
+## ---- Notes below is same as front end repo ------
 
 ### Bonus Features (beyond MVP requirements):
 
