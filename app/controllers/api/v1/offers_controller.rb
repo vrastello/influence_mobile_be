@@ -16,7 +16,7 @@ class Api::V1::OffersController < Api::ApplicationController
   end
 
   def log_play_hours
-    LogPlayHoursService.new(params: update_params, user: @current_user).log
+    LogPlayHoursService.new(params: update_params, user: current_user).log
 
     render json: { message: 'Play hours logged successfully' }, status: :ok
   rescue StandardError => e
@@ -35,6 +35,10 @@ class Api::V1::OffersController < Api::ApplicationController
   end
 
   def authenticate_admin
-    render json: { error: 'Unauthorized' }, status: :unauthorized unless @current_user.admin?
+    render json: { error: 'Unauthorized' }, status: :unauthorized unless current_user.admin?
+  end
+
+  def current_user
+    @current_user
   end
 end

@@ -15,7 +15,6 @@ class Api::ApplicationController < ActionController::API
   end
 
   def find_user_with_token
-    request.headers.inspect
     header = request.headers['Authorization']
     header = header.split(' ').last if header
     decoded = jwt_decode(header)
