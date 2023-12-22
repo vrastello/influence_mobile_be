@@ -26,6 +26,7 @@
   - user only has access to offers page
   - if user attempts to access admin url path they will be authenticated as admin on back end
   - if not admin recieve redirect and error message
+  - use chrome developer tools to see token (application -> storage -> sessionStorage)
 - Validation on login and registration form
   - rails validation errors will display on FE
   - invalid user and password will display on FE
