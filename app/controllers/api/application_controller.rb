@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# test
 
 class Api::ApplicationController < ActionController::API
   include JsonWebToken
